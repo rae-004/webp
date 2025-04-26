@@ -1,0 +1,143 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #fdf6f0;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+  }
+  
+  ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  li {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    margin: 5px;
+    background: #fff;
+    border-radius: 5px;
+    font-size: 16px;
+  }
+  
+  button {
+    background-color: #ff7f50;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 14px;
+  }
+  
+  button:hover {
+    background-color: #ff6347;
+  }
+  
+  /* Order Box Styling */
+  .order-box {
+    background: #fff;
+    padding: 15px;
+    border-radius: 8px;
+    margin: 15px auto;
+    width: 80%;
+    max-width: 500px;
+    box-shadow: 2px 2px 10px rgba(0,0,0,0.1);
+    text-align: left;
+  }
+  
+  /* Order Header */
+  .order-header {
+    display: flex;
+    flex-direction: column;
+    background: #ff7f50;
+    color: white;
+    padding: 10px;
+    border-radius: 8px 8px 0 0;
+    font-size: 14px;
+    text-align: left;
+  }
+  
+  .order-header span {
+    margin: 3px 0;
+  }
+  
+  /* Order Actions */
+  .order-actions {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 15px;
+  }
+  
+  .order-actions button {
+    flex: 1;
+    margin: 0 5px;
+    padding: 8px;
+    font-size: 14px;
+  }
+  
+  .track-btn {
+    background: #ffa726;
+  }
+  
+  .track-btn:hover {
+    background: #ff9800;
+  }
+  
+  .cancel-btn {
+    background: #d32f2f;
+  }
+  
+  .cancel-btn:hover {
+    background: #b71c1c;
+  }
+  
+  .review-btn {
+    background: #ffcc80;
+    color: black;
+  }
+  
+  .review-btn:hover {
+    background: #ffb74d;
+  }
+  
+  /* Navigation Bar */
+  nav {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin: 15px 0;
+  }
+  
+  nav a {
+    text-decoration: none;
+    padding: 10px;
+    font-weight: bold;
+    color: #444;
+    border-bottom: 2px solid transparent;
+    font-size: 14px;
+  }
+  
+  nav a.active {
+    border-bottom: 2px solid #ff7f50;
+  }
+  
+  /* Header */
+  header {
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    background: white;
+    box-shadow: 0px 2px 5px rgba(0,0,0,0.1);
+    font-size: 18px;
+  }
+  
+  header button {
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    margin-right: 10px;
+  }
+  
