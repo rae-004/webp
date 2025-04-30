@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+const API_URL = 'http://localhost:5000/api/orders';
+
 const items = [
   { name: "Milk", price: 12 },
   { name: "Bread", price: 15 },
@@ -19,27 +21,34 @@ const App = () => {
     setSelectedItems([...selectedItems, items[index]]);
   };
 
-  const placeOrder = () => {
+  const placeOrder = async () => {
     if (selectedItems.length === 0) {
       alert("Please select items before ordering.");
       return;
     }
-
-    const orderId = localStorage.getItem("orderId") 
-      ? parseInt(localStorage.getItem("orderId")) + 1 
-      : 1;
-
-    const order = {
-      id: "#A" + orderId.toString().padStart(6, "0"),
-      datePlaced: new Date().toLocaleDateString(),
-      deliveryTo: "selected address",
-      items: selectedItems,
-      total: selectedItems.reduce((sum, item) => sum + item.price, 0),
-    };
-
-    localStorage.setItem("order", JSON.stringify(order));
-    localStorage.setItem("orderId", orderId);
-    navigate("/orders");
+  
+    try {
+      const response = await fetch(API_URL, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          userId: "user123", // Replace with actual user ID from auth
+          deliveryTo: "selected address",
+          items: selectedItems
+        })
+      });
+  
+      if (response.ok) {
+        navigate("/orders");
+      } else {
+        alert("Failed to place order");
+      }
+    } catch (error) {
+      console.error("Error placing order:", error);
+      alert("Error placing order");
+    }
   };
 
   return (

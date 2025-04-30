@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+const API_URL = 'http://localhost:5000/api/orders';
+
 const Orders = () => {
   const [orders, setOrders] = useState({
     current: [],
@@ -11,26 +13,39 @@ const Orders = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const orderData = localStorage.getItem("order");
-    if (orderData) {
-      const order = JSON.parse(orderData);
-      setOrders(prevOrders => ({
-        ...prevOrders,
-        current: [order]
-      }));
-    }
+    const fetchOrders = async () => {
+      try {
+        const response = await fetch(`${API_URL}/user/user123`); // Replace with actual user ID
+        const data = await response.json();
+        setOrders(data);
+      } catch (error) {
+        console.error("Error fetching orders:", error);
+      }
+    };
+  
+    fetchOrders();
   }, []);
-
-  const cancelOrder = (orderId) => {
-    const orderToCancel = orders.current.find(order => order.id === orderId);
-    if (orderToCancel) {
-      setOrders(prevOrders => ({
-        ...prevOrders,
-        current: prevOrders.current.filter(order => order.id !== orderId),
-        cancelled: [...prevOrders.cancelled, orderToCancel]
-      }));
-      localStorage.removeItem("order");
-      alert("Order canceled.");
+  
+  // Modify cancelOrder
+  const cancelOrder = async (orderId) => {
+    try {
+      const response = await fetch(`${API_URL}/cancel/${orderId}`, {
+        method: 'PUT'
+      });
+  
+      if (response.ok) {
+        setOrders(prevOrders => ({
+          ...prevOrders,
+          current: prevOrders.current.filter(order => order.orderId !== orderId),
+          cancelled: [...prevOrders.cancelled, prevOrders.current.find(order => order.orderId === orderId)]
+        }));
+        alert("Order canceled.");
+      } else {
+        alert("Failed to cancel order");
+      }
+    } catch (error) {
+      console.error("Error canceling order:", error);
+      alert("Error canceling order");
     }
   };
 
